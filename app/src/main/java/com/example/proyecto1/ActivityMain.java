@@ -22,18 +22,18 @@ public class ActivityMain extends AppCompatActivity  {
     }
 
     public void abrirUsuario(View view) {
-        boolean logeado = obtenerEstadoSesion();
-        if (logeado) {
-            Intent login = new Intent(this, ActivityUsuario.class);
+        String nomUsuario = obtenerUsuario();
+        if (nomUsuario.equals("")) {
+            Intent login = new Intent(this, ActivityLogin.class);
             startActivity(login);
         } else {
-            Intent usuario = new Intent(this, ActivityLogin.class);
+            Intent usuario = new Intent(this, ActivityUsuario.class);
             startActivity(usuario);
         }
     }
 
-    public boolean obtenerEstadoSesion() {
+    public String obtenerUsuario() {
         SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCE, MODE_PRIVATE);
-        return preferences.getBoolean("sesion", false);
+        return preferences.getString("usuario", "");
     }
 }
