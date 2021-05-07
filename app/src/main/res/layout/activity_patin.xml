@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BCBCBC"
+    android:orientation="vertical"
+    tools:context=".ActivityPatin">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@drawable/bordecustom">
+
+        <ImageView
+            android:id="@+id/logoTresBarras"
+            android:layout_width="36dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center|start"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:contentDescription="@string/iconobarras"
+            app:srcCompat="@drawable/tres_barras" />
+
+        <ImageView
+            android:id="@+id/logoUsuario"
+            android:layout_width="36dp"
+            android:layout_height="29dp"
+            android:layout_gravity="center|end"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@string/iconousuario"
+            android:onClick="abrirUsuario"
+            app:srcCompat="@drawable/usuario" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logoRolity"
+            android:layout_width="100dp"
+            android:layout_height="71dp"
+            android:layout_gravity="center|top"
+            android:contentDescription="@string/logorolity"
+            android:onClick="abrirMain"
+            app:srcCompat="@drawable/logo_rolity_amarillo" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="338dp"
+            android:layout_height="2dp"
+            android:layout_gravity="center"
+            android:background="#303030" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#BCBCBC"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="392dp"
+                android:layout_height="563dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="40dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView7"
+                    android:layout_width="230dp"
+                    android:layout_height="203dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
+                    android:contentDescription="@string/patin"
+                    app:srcCompat="@drawable/patin" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/nombrePatin"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="280dp"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:background="#303030" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="364dp"
+                    android:layout_height="291dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="30dp"
+                    android:inputType="textMultiLine"
+                    android:text="Características:\n- Bota: Hardcore Evo Carbon composite heat-moulding y relleno anatómico 3D\n  \n- Chasis: Nexus Alu Rockered; 225mm (40-41), 235mm (42-46) \n \n- Ruedas: Undercover Black 90mm \n\n- 86A bullet (perfil afilado)\n\n- Rodamientos: Wicked Twincam ILQ9 Classic\n\n- Cierres: Micrométrico en caña y empeine, powerstrap velcro en punta y cordones"
+                    android:textAllCaps="false"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    tools:ignore="HardcodedText,TextViewEdits" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/botonComprar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bordecustombotonseleccionado"
+                android:text="@string/precio"
+                android:textColor="#000000" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

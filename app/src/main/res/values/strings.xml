@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">Rolity</string>
+    <string name="novedades">NOVEDADES</string>
+    <string name="logorolity">logoRolity</string>
+    <string name="precio">599,00€</string>
+    <string name="nombrePatin">Powerslide HC Pro Evo</string>
+    <string name="patin">patin</string>
+    <string name="iconousuario">iconoUsuario</string>
+    <string name="iconobarras">iconoBarras</string>
+    <string name="bannerenvio">bannerEnvio</string>
+    <string name="banneroutlet">bannerOutlet</string>
+    <string name="iniciarSesion">Iniciar sesión</string>
+    <string name="usuario">Usuario:</string>
+    <string name="contrasenia">Contraseña:</string>
+    <string name="botonEntrar">Entrar</string>
+    <string name="textoRegistrar">Regístrese</string>
+    <string name="textoContrasenia">Contraseña</string>
+    <string name="botonRegistro">Registro</string>
+    <string name="botonDatos">Datos</string>
+    <string name="botonLista">Mi lista</string>
+    <string name="textoDatosIdentificacion">Datos de identificación</string>
+    <string name="textoDatosFacturacion">Datos de facturación</string>
+    <string name="textoDatosEnvio">Datos de envío</string>
+    <string name="botonGuardarCambios">Guardar cambios</string>
+    <string name="repetirContrasenia">Repetir contraseña:</string>
+    <string name="nombreUsuario">Nombre de usuario:</string>
+    <string name="email">E-mail:</string>
+    <string name="textoNombre">Nombre:</string>
+    <string name="textoApellidos">Apellidos:</string>
+    <string name="textoTlf">Teléfono:</string>
+    <string name="textoDireccion">Dirección:</string>
+    <string name="botonComprar">Comprar</string>
+    <string name="textoPais">País:</string>
+    <string name="textoCP">Código postal:</string>
+    <string name="textoProvincia">Provincia:</string>
+    <string name="textoLocalidad">Localidad:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_datos_usuario">Fragment Datos Usuario</string>
+    <string name="label_lista_usuario">Fragment Lista Usuario</string>
+    <string name="open">open</string>
+    <string name="create_new">crear</string>
+    <string name="hintNomUsuario">Nombre de usuario</string>
+    <string name="rbMantenerSesion">Mantener sesión iniciada</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+</resources>
