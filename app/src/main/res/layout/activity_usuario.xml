@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    tools:context=".ActivityUsuario">
+    tools:context="com.example.rolity.ActivityUsuario">
 
     <FrameLayout
         android:id="@+id/layoutMenu"
@@ -154,32 +154,6 @@
                             android:autofillHints=""
                             android:ems="10"
                             android:inputType="textEmailAddress"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="115dp">
-
-                        <TextView
-                            android:id="@+id/textView14"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:inputType="textMultiLine"
-                            android:text="@string/nombreUsuario"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            tools:ignore="TextViewEdits" />
-
-                        <EditText
-                            android:id="@+id/logedUsuario"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
                             android:textColor="#000000" />
                     </TableRow>
 

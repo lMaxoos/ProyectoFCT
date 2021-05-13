@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    tools:context=".ActivityLista">
+    tools:context="com.example.rolity.ActivityLista">
 
     <FrameLayout
         android:layout_width="match_parent"

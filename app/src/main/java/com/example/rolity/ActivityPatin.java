@@ -1,10 +1,13 @@
-package com.example.proyecto1;
+package com.example.rolity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.proyecto1.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class ActivityPatin extends AppCompatActivity {
 
@@ -20,14 +23,12 @@ public class ActivityPatin extends AppCompatActivity {
     }
 
     public void abrirUsuario(View view) {
-        boolean logeado = ((App) this.getApplication()).isLogeado();
-        if (logeado) {
-            Intent login = new Intent(this, ActivityUsuario.class);
-            startActivity(login);
-        } else {
-            Intent usuario = new Intent(this, ActivityLogin.class);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent usuario = new Intent(this, ActivityUsuario.class);
             startActivity(usuario);
+        } else {
+            Intent login = new Intent(this, ActivityLogin.class);
+            startActivity(login);
         }
-
     }
 }

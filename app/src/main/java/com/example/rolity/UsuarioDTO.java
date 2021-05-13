@@ -1,4 +1,4 @@
-package com.example.proyecto1;
+package com.example.rolity;
 
 public class UsuarioDTO {
     private String nom_usuario;

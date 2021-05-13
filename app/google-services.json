@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "489907146296",
+    "project_id": "rolity-13ba8",
+    "storage_bucket": "rolity-13ba8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:489907146296:android:e9fd4be492f882aacea0cd",
+        "android_client_info": {
+          "package_name": "com.matheus.rolity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "489907146296-9j01pk9o1nkchsthobj5425eohog06fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaJloSeWz4xHEgt4aEmpysOEMDmyZEsfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "489907146296-9j01pk9o1nkchsthobj5425eohog06fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.proyecto1;
+package com.example.rolity;
 
 import android.content.Context;
 import android.database.Cursor;

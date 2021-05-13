@@ -1,4 +1,4 @@
-package com.example.proyecto1;
+package com.example.rolity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,8 +7,10 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
-public class ActivityMain extends AppCompatActivity  {
-    private static final String STRING_PREFERENCE = "ROLITY";
+import com.example.proyecto1.R;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class ActivityMain extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,18 +24,12 @@ public class ActivityMain extends AppCompatActivity  {
     }
 
     public void abrirUsuario(View view) {
-        String nomUsuario = obtenerUsuario();
-        if (nomUsuario.equals("")) {
-            Intent login = new Intent(this, ActivityLogin.class);
-            startActivity(login);
-        } else {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             Intent usuario = new Intent(this, ActivityUsuario.class);
             startActivity(usuario);
+        } else {
+            Intent login = new Intent(this, ActivityLogin.class);
+            startActivity(login);
         }
-    }
-
-    public String obtenerUsuario() {
-        SharedPreferences preferences = getSharedPreferences(STRING_PREFERENCE, MODE_PRIVATE);
-        return preferences.getString("usuario", "");
     }
 }

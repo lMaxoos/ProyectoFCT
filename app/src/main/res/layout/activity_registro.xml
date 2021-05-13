@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    tools:context=".ActivityRegistro">
+    tools:context="com.example.rolity.ActivityRegistro">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/menuPrincipal"
@@ -127,30 +127,6 @@
                         android:autofillHints=""
                         android:ems="10"
                         android:inputType="textEmailAddress"
-                        android:textColor="#000000" />
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="115dp">
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center|start"
-                        android:text="@string/nombreUsuario"
-                        android:textColor="#000000"
-                        android:textSize="16sp" />
-
-                    <EditText
-                        android:id="@+id/registerUsuario"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:autofillHints=""
-                        android:ems="10"
-                        android:inputType="textPersonName"
                         android:textColor="#000000" />
                 </TableRow>
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    tools:context=".ActivityPatin">
+    tools:context="com.example.rolity.ActivityPatin">
 
     <FrameLayout
         android:layout_width="match_parent"

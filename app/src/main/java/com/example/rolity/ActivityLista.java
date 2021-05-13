@@ -1,10 +1,12 @@
-package com.example.proyecto1;
+package com.example.rolity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.proyecto1.R;
 
 public class ActivityLista extends AppCompatActivity {
 
