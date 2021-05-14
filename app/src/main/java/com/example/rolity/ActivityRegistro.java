@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +14,8 @@ import com.example.proyecto1.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -35,7 +32,7 @@ public class ActivityRegistro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
 
         db = FirebaseFirestore.getInstance();
-        Button botonCrearUsu = findViewById(R.id.botonGuardarDatos);
+        Button botonCrearUsu = findViewById(R.id.botonRegistrarUsuario);
         botonCrearUsu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

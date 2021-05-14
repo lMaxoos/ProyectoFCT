@@ -25,9 +25,4 @@ public class ActivityLista extends AppCompatActivity {
         Intent ejemplo = new Intent(this, ActivityUsuario.class);
         startActivity(ejemplo);
     }
-
-    public void abrirPatin(View view) {
-        Intent ejemplo = new Intent(this, ActivityPatin.class);
-        startActivity(ejemplo);
-    }
 }
