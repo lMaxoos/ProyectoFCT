@@ -38,12 +38,6 @@ public class FragmentDatos extends Fragment {
         // Required empty public constructor
     }
 
-    /*public static FragmentDatos newInstance(String param1, String param2) {
-        FragmentDatos fragment = new FragmentDatos();
-
-        return fragment;
-    }*/
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
