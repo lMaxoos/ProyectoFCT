@@ -27,7 +27,7 @@ public class ActivityPatin extends AppCompatActivity {
             Intent usuario = new Intent(this, ActivityUsuario.class);
             startActivity(usuario);
         } else {
-            Intent login = new Intent(this, ActivityLogin.class);
+            Intent login = new Intent(this, ActivityLoginRegister.class);
             startActivity(login);
         }
     }

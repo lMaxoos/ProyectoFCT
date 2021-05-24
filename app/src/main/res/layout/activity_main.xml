@@ -8,9 +8,45 @@
     android:orientation="vertical"
     tools:context="com.example.rolity.ActivityMain">
 
-    <ScrollView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/menuPrincipal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="44dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/bordecustom">
+
+        <ImageView
+            android:id="@+id/logoTresBarras"
+            android:layout_width="36dp"
+            android:layout_height="29dp"
+            android:contentDescription="@string/iconobarras"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.016"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533"
+            app:srcCompat="@drawable/tres_barras" />
+
+        <ImageView
+            android:id="@+id/logoUsuario"
+            android:layout_width="36dp"
+            android:layout_height="29dp"
+            android:contentDescription="@string/iconousuario"
+            android:onClick="abrirUsuario"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.981"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.533"
+            app:srcCompat="@drawable/usuario" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -18,50 +54,14 @@
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/menuPrincipal"
-                android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/bordecustom">
-
-                <ImageView
-                    android:id="@+id/logoTresBarras"
-                    android:layout_width="36dp"
-                    android:layout_height="29dp"
-                    android:contentDescription="@string/iconobarras"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.016"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.533"
-                    app:srcCompat="@drawable/tres_barras" />
-
-                <ImageView
-                    android:id="@+id/logoUsuario"
-                    android:layout_width="36dp"
-                    android:layout_height="29dp"
-                    android:contentDescription="@string/iconousuario"
-                    android:onClick="abrirUsuario"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.981"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.533"
-                    app:srcCompat="@drawable/usuario" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutLogo"
                 android:layout_width="match_parent"
-                android:layout_height="85dp">
+                android:layout_height="65dp">
 
                 <ImageView
                     android:id="@+id/logoRolity"
                     android:layout_width="100dp"
-                    android:layout_height="71dp"
+                    android:layout_height="50dp"
                     android:contentDescription="@string/logorolity"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -81,14 +81,14 @@
                     app:layout_constraintHorizontal_bias="0.493"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/logoRolity"
-                    app:layout_constraintVertical_bias="0.876" />
+                    app:layout_constraintVertical_bias="0.827" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <ImageView
                 android:id="@+id/bannerEnvio"
                 android:layout_width="360dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/bannerenvio"
                 app:srcCompat="@drawable/enviogratis" />
@@ -96,7 +96,7 @@
             <ImageView
                 android:id="@+id/bannerOutlet"
                 android:layout_width="360dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/banneroutlet"
                 app:srcCompat="@drawable/outlet" />
@@ -129,9 +129,9 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/listRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

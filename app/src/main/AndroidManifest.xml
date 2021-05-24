@@ -20,9 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.example.rolity.ActivityRegistro" />
-        <activity android:name="com.example.rolity.ActivityLista" />
         <activity android:name="com.example.rolity.ActivityUsuario" />
-        <activity android:name="com.example.rolity.ActivityLogin" />
+        <activity android:name="com.example.rolity.ActivityLoginRegister" />
         <activity android:name="com.example.rolity.ActivityPatin" />
 
     </application>

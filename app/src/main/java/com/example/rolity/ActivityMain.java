@@ -1,22 +1,24 @@
 package com.example.rolity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.example.proyecto1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +45,7 @@ public class ActivityMain extends AppCompatActivity {
                 for (int i = 0; i < lista.size(); i++) {
                     String nombre = lista.get(i).getString("nombre");
                     String precio = lista.get(i).getString("precio");
+
                     producto.add(new ListProducto(0, nombre, precio));
                 }
 
@@ -51,14 +54,10 @@ public class ActivityMain extends AppCompatActivity {
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(ActivityMain.this, 2));
                 recyclerView.setAdapter(listAdaptador);
-                // TODO: 18/05/2021 Guardar y coger imágenes del FireBase para mostrarlas y añadir un par más. Añadir listeners a cada Vista y diseñar el activity de los producto.
+
+
             }
         });
-
-        /*producto.add(new ListProducto(0,"Hola", "Whats happenin"));
-        producto.add(new ListProducto(0,"Hola2", "Whats happeninn"));
-        producto.add(new ListProducto(0,"Hola3", "Whats happeninnn"));
-        producto.add(new ListProducto(0,"Hola4", "Whats happeninnnn"));*/
     }
 
     public void abrirPatin(View view) {
@@ -71,7 +70,7 @@ public class ActivityMain extends AppCompatActivity {
             Intent usuario = new Intent(this, ActivityUsuario.class);
             startActivity(usuario);
         } else {
-            Intent login = new Intent(this, ActivityLogin.class);
+            Intent login = new Intent(this, ActivityLoginRegister.class);
             startActivity(login);
         }
     }

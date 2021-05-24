@@ -1,5 +1,6 @@
 package com.example.rolity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.proyecto1.R;
@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,10 +30,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FragmentDatos extends Fragment {
-    private ArrayList<EditText> eCampos;
-    private ArrayList<String> campos;
+    private ArrayList<EditText> editTexts;
+    private ArrayList<String> datos;
     private FirebaseFirestore db;
     private boolean preparado;
+    private final String[] NOMBRES_CAMPOS = new String[]{"email", "nombre", "apellidos", "tlf", "pais", "cp", "provincia", "localidad", "direccion"};
+    private String userEmail;
+    private FirebaseUser usr;
 
     public FragmentDatos() {
         preparado = false;
@@ -53,29 +58,6 @@ public class FragmentDatos extends Fragment {
             cargarDatos();
             preparado = true;
         }
-    }
-
-    private void cargarDatos() {
-        System.out.println("PREPARANDO LOS DATOS...");
-        ArrayList<EditText> editTexts = cargarEditTexts();
-        db = FirebaseFirestore.getInstance();
-        FirebaseUser usr = FirebaseAuth.getInstance().getCurrentUser();
-
-        db.collection("usuarios").document(usr.getEmail()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                editTexts.get(0).setText(documentSnapshot.getString("email"));
-                editTexts.get(1).setText(documentSnapshot.getString("contrasenia"));
-                editTexts.get(2).setText(documentSnapshot.getString("nombre"));
-                editTexts.get(3).setText(documentSnapshot.getString("apellidos"));
-                editTexts.get(4).setText(documentSnapshot.getString("tlf"));
-                editTexts.get(5).setText(documentSnapshot.getString("pais"));
-                editTexts.get(6).setText(documentSnapshot.getString("cp"));
-                editTexts.get(7).setText(documentSnapshot.getString("provincia"));
-                editTexts.get(8).setText(documentSnapshot.getString("localidad"));
-                editTexts.get(9).setText(documentSnapshot.getString("direccion"));
-            }
-        });
 
         Button btnGuardarDatos = getActivity().findViewById(R.id.botonGuardarCambios);
         btnGuardarDatos.setOnClickListener(new View.OnClickListener() {
@@ -90,99 +72,174 @@ public class FragmentDatos extends Fragment {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
-                Intent login = new Intent(getActivity(), ActivityLogin.class);
+                Intent login = new Intent(getActivity(), ActivityLoginRegister.class);
                 startActivity(login);
                 getActivity().finish();
             }
         });
+
+        Button btnCambiarPass = getActivity().findViewById(R.id.btnChangePass);
+        btnCambiarPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarDialog();
+            }
+        });
+    }
+
+    private void mostrarDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_cambiar_pass, null);
+        builder.setView(view);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        EditText editTextOldPass = dialog.findViewById(R.id.changePassOld);
+        EditText editTextNewPass = dialog.findViewById(R.id.changePassNew);
+        EditText editTextNewPass2 = dialog.findViewById(R.id.changePassNew2);
+
+
+        Button btnEnviarNuevaPass = dialog.findViewById(R.id.btnChangePassEnviar);
+        btnEnviarNuevaPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (editTextNewPass.getText().toString().equals(editTextNewPass2.getText().toString())) {
+                    AuthCredential credential = EmailAuthProvider.getCredential(userEmail, editTextOldPass.getText().toString());
+                    usr.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                usr.updatePassword(editTextNewPass.getText().toString()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(getActivity(), "Contraseña actualizada", Toast.LENGTH_LONG).show();
+                                            dialog.dismiss();
+                                        }
+                                        else
+                                            System.out.println(task.getException().getMessage());
+                                    }
+                                });
+                            }
+                            else {
+                                Toast.makeText(getActivity(), "Contraseña incorrecta", Toast.LENGTH_LONG).show();
+                                editTextOldPass.setText("");
+                            }
+
+                        }
+                    });
+                }
+                else {
+                    Toast.makeText(getActivity(), "Ambas contraseñas no coinciden", Toast.LENGTH_LONG).show();
+                    editTextNewPass.setText("");
+                    editTextNewPass2.setText("");
+                }
+            }
+        });
+    }
+
+    private void cargarDatos() {
+        editTexts = cargarEditTexts();
+
+        db = FirebaseFirestore.getInstance();
+
+        usr = FirebaseAuth.getInstance().getCurrentUser();
+        userEmail = usr.getEmail();
+
+        db.collection("usuarios").document(userEmail).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                for (int i = 0; i < editTexts.size(); i++) {
+                    editTexts.get(i).setText(documentSnapshot.getString(NOMBRES_CAMPOS[i]));
+                }
+            }
+        });
+
     }
 
     private void guardarDatosUsuario() {
-        eCampos = cargarEditTexts();
-        campos = new ArrayList<>();
-        String email = campos.get(0).trim();
-        String pass = eCampos.get(1).getText().toString();
+        datos = new ArrayList<>();
 
         HashMap<String, String> datosUser = new HashMap<>();
 
         boolean error;
         error = comprobarCampos();
         if (!error) {
-            error = comprobarEmail(email, pass);
-            if (!error) {
-                datosUser.put("email", campos.get(0).trim());
-                datosUser.put("contrasenia", campos.get(1).trim());
-                datosUser.put("nombre", campos.get(2).trim());
-                datosUser.put("apellidos", campos.get(3).trim());
-                datosUser.put("tlf", campos.get(4).trim());
-                datosUser.put("pais", campos.get(5).trim());
-                datosUser.put("cp", campos.get(6).trim());
-                datosUser.put("provincia", campos.get(7).trim());
-                datosUser.put("localidad", campos.get(8).trim());
-                datosUser.put("direccion", campos.get(9).trim());
-
-                db.collection("usuarios").document(email).set(datosUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getActivity(), "Usuario actualizado!",  Toast.LENGTH_SHORT).show();
-                    }
-                });
+            datosUser.put("email", userEmail);
+            for (int i = 0; i < datos.size(); i++) {
+                datosUser.put(NOMBRES_CAMPOS[i], datos.get(i).trim());
             }
+
+            db.collection("usuarios").document(userEmail).set(datosUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    System.out.println("Datos actualizados");
+                    Toast.makeText(getActivity(), "Usuario actualizado!",  Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            });
         }
     }
 
     private boolean comprobarCampos() {
-        for (int i = 0; i < eCampos.size(); i++) {
-            if (eCampos.get(i).getText().toString().isEmpty()) {
+        for (int i = 0; i < editTexts.size(); i++) {
+            if (editTexts.get(i).getText().toString().isEmpty()) {
                 Toast.makeText(getActivity(),"Completa todos los campos!", Toast.LENGTH_SHORT).show();
                 return true;
             }
-            campos.add(eCampos.get(i).getText().toString());
+            datos.add(editTexts.get(i).getText().toString());
         }
         return false;
     }
 
-    private boolean comprobarEmail(String email, String pass) {
+    /*private boolean comprobarPass(String email, String newPass) {
         final boolean[] error = {true};
 
         FirebaseUser usr = FirebaseAuth.getInstance().getCurrentUser();
-        usr.updateEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                error[0] = false;
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+        AuthCredential credential = EmailAuthProvider.getCredential(usr.getEmail(), currentPass);
+        usr.reauthenticate(credential).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                if (e.getMessage().contains("already in use"))
-                    Toast.makeText(getActivity(),"Este email ya está en uso!", Toast.LENGTH_SHORT).show();
-                error[0] = true;
+                System.out.println(e.getMessage());
             }
-        });
-
-        usr.updatePassword(pass).addOnCompleteListener(new OnCompleteListener<Void>() {
+        }).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                error[0] = false;
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e.getMessage().contains("password is invalid"))
-                    Toast.makeText(getActivity(), "La contraseña es muy corta (6 caractéres mínimo)", Toast.LENGTH_SHORT).show();
-                error[0] = true;
+                if (task.isSuccessful()) {
+                    usr.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful())
+                                System.out.println("Contraseña actualizada");
+                            error[0] = false;
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            System.out.println(e.getMessage());
+                            if (e.getMessage().contains("password is invalid"))
+                                Toast.makeText(getActivity(), "La contraseña es muy corta (6 caractéres mínimo)", Toast.LENGTH_SHORT).show();
+                            error[0] = true;
+                        }
+                    });
+                }
             }
         });
 
         return error[0];
-    }
+    }*/
 
 
     private ArrayList<EditText> cargarEditTexts() {
         ArrayList<EditText> editTexts = new ArrayList<>();
 
         editTexts.add(getActivity().findViewById(R.id.logedEmail));
-        editTexts.add(getActivity().findViewById(R.id.logedContrasenia));
         editTexts.add(getActivity().findViewById(R.id.logedNombre));
         editTexts.add(getActivity().findViewById(R.id.logedApellidos));
         editTexts.add(getActivity().findViewById(R.id.logedTlf));

@@ -11,353 +11,329 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layoutDatos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <LinearLayout
-                android:id="@+id/layoutDatos"
+            <TextView
+                android:id="@+id/datosIdentificacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:soundEffectsEnabled="false"
+                android:text="@string/textoDatosIdentificacion"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
+            <View
+                android:id="@+id/divider4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:background="#303030" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textoEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="@string/email"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:autofillHints=""
+                        android:editable="false"
+                        android:ems="10"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/btnChangePass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:background="@drawable/bordecustombotonseleccionado"
+                android:text="Cambiar contraseña"
+                android:textColor="#000000" />
 
-                <TextView
-                    android:id="@+id/datosIdentificacion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:soundEffectsEnabled="false"
-                    android:text="@string/textoDatosIdentificacion"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
+            <TextView
+                android:id="@+id/datosFacturacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/textoDatosFacturacion"
+                android:textColor="#000000"
+                android:textSize="17sp" />
 
-                <View
-                    android:id="@+id/divider4"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="start"
-                    android:layout_marginBottom="10dp"
-                    android:background="#303030" />
+            <View
+                android:id="@+id/divider5"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:background="#303030" />
 
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textoEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/email"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedEmail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textEmailAddress"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView15"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/contrasenia"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedContrasenia"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPassword"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                </TableLayout>
-
-                <TextView
-                    android:id="@+id/datosFacturacion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/textoDatosFacturacion"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <View
-                    android:id="@+id/divider5"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="start"
-                    android:layout_marginBottom="10dp"
-                    android:background="#303030" />
-
-                <TableLayout
+                <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TableRow
+                    <TextView
+                        android:id="@+id/textView17"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="@string/textoNombre"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
 
-                        <TextView
-                            android:id="@+id/textView17"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/textoNombre"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedNombre"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
+                    <EditText
+                        android:id="@+id/logedNombre"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView18"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/textoApellidos"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedApellidos"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView19"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/textoTlf"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedTlf"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                </TableLayout>
-
-                <TextView
-                    android:id="@+id/datosEnvio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/textoDatosEnvio"
-                    android:textColor="#000000"
-                    android:textSize="17sp" />
-
-                <View
-                    android:id="@+id/divider6"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="start"
-                    android:layout_marginBottom="10dp"
-                    android:background="#303030" />
-
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView23"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="País"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedPais"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView21"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="Código postal"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedCp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView22"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="Provincia"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedProvincia"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView20"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="Localidad"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedLocalidad"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/textView24"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center|start"
-                            android:text="@string/textoDireccion"
-                            android:textColor="#000000"
-                            android:textSize="16sp" />
-
-                        <EditText
-                            android:id="@+id/logedDireccion"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:autofillHints=""
-                            android:ems="10"
-                            android:inputType="textPersonName"
-                            android:textColor="#000000" />
-                    </TableRow>
-
-                </TableLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/botonGuardarCambios"
-                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/bordecustombotonseleccionado"
-                        android:text="@string/botonGuardarCambios"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
                         android:textColor="#000000" />
+                </TableRow>
 
-                    <Button
-                        android:id="@+id/botonCerrarSesion"
-                        android:layout_width="150dp"
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="@string/textoApellidos"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedApellidos"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/bordecustom"
-                        android:text="@string/cerrar_sesion"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
                         android:textColor="#000000" />
-                </LinearLayout>
+                </TableRow>
 
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="@string/textoTlf"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedTlf"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TextView
+                android:id="@+id/datosEnvio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/textoDatosEnvio"
+                android:textColor="#000000"
+                android:textSize="17sp" />
+
+            <View
+                android:id="@+id/divider6"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:background="#303030" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="País"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedPais"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView21"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="Código postal"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedCp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView22"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="Provincia"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedProvincia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="Localidad"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedLocalidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|start"
+                        android:text="@string/textoDireccion"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/logedDireccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autofillHints=""
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="#000000" />
+                </TableRow>
+
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/botonGuardarCambios"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bordecustombotonseleccionado"
+                    android:text="@string/botonGuardarCambios"
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/botonCerrarSesion"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/bordecustom"
+                    android:text="@string/cerrar_sesion"
+                    android:textColor="#000000" />
             </LinearLayout>
 
         </LinearLayout>
