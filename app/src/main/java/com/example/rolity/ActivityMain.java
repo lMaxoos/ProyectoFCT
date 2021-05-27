@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import com.example.proyecto1.R;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +45,7 @@ public class ActivityMain extends AppCompatActivity {
                     producto.add(new Producto(nombre, precio));
                 }
 
-                RecyclerView recyclerView = findViewById(R.id.listRecyclerView);
+                RecyclerView recyclerView = findViewById(R.id.recyclerViewLista);
                 ListAdaptador listAdaptador = new ListAdaptador(ActivityMain.this, producto, recyclerView);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(ActivityMain.this, 2));
