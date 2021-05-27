@@ -1,7 +1,6 @@
 package com.example.rolity;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.proyecto1.R;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -21,14 +19,21 @@ import java.util.List;
 
 public class ListAdaptador extends RecyclerView.Adapter<ListAdaptador.ViewHolder> {
     private Context contexto;
-    private List<ListProducto> productos;
+    private List<Producto> productos;
     private LayoutInflater inflater;
     private StorageReference st;
+    private RecyclerView rv;
 
-    public ListAdaptador(Context contexto, List<ListProducto> productos) {
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
+
+    public ListAdaptador(Context contexto, List<Producto> productos, RecyclerView rv) {
         this.inflater = LayoutInflater.from(contexto);
         this.contexto = contexto;
         this.productos = productos;
+        this.rv = rv;
         st = FirebaseStorage.getInstance().getReference();
     }
 
@@ -36,6 +41,14 @@ public class ListAdaptador extends RecyclerView.Adapter<ListAdaptador.ViewHolder
     @Override
     public ListAdaptador.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.lista_productos, null);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = rv.getChildLayoutPosition(v);
+                String nombrePatin = productos.get(pos).getNombrePatin();
+                ActivityMain.abrirProducto(contexto, nombrePatin);
+            }
+        });
         return new ListAdaptador.ViewHolder(view);
     }
 
@@ -49,7 +62,7 @@ public class ListAdaptador extends RecyclerView.Adapter<ListAdaptador.ViewHolder
         return productos.size();
     }
 
-    public void setItems(List<ListProducto> productos) {
+    public void setItems(List<Producto> productos) {
         this.productos = productos;
     }
 
@@ -63,20 +76,13 @@ public class ListAdaptador extends RecyclerView.Adapter<ListAdaptador.ViewHolder
             precioPatin = itemView.findViewById(R.id.precioPatin);
         }
 
-        void bindData(final ListProducto producto) {
+        void bindData(final Producto producto) {
             StorageReference pathReference = st.child("patines/" + producto.getNombrePatin() + ".jpg");
             Glide.with(contexto)
                     .load(pathReference)
                     .into(imagen);
-
             nombrePatin.setText(producto.getNombrePatin());
             precioPatin.setText(producto.getPrecioPatin());
-            imagen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                }
-            });
         }
     }
 }

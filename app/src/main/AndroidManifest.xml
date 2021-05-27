@@ -4,14 +4,14 @@
 
     <application
         android:name="com.example.rolity.App"
-        android:label="@string/app_name"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:windowSoftInputMode="adjustResize">
-
+        <activity android:name="com.example.rolity.ActivityProducto" />
         <activity android:name="com.example.rolity.ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +22,6 @@
         <activity android:name="com.example.rolity.ActivityRegistro" />
         <activity android:name="com.example.rolity.ActivityUsuario" />
         <activity android:name="com.example.rolity.ActivityLoginRegister" />
-        <activity android:name="com.example.rolity.ActivityPatin" />
-
     </application>
 
 </manifest>

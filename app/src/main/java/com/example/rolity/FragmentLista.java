@@ -32,10 +32,7 @@ public class FragmentLista extends Fragment {
 
     }
 
-    public void abrirPatin(View view) {
-        Intent ejemplo = new Intent(getContext(), ActivityPatin.class);
-        startActivity(ejemplo);
-    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
