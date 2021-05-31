@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    tools:context="com.example.rolity.ActivityProducto">
+    tools:context="com.matheus.rolity.ActivityProducto">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_above="@id/layoutInferiorProducto">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,22 +88,20 @@
         </LinearLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/linearLayout"
+    <RelativeLayout
+        android:id="@+id/layoutInferiorProducto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/botonComprar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bordecustombotonseleccionado"
+            android:background="@drawable/boton_seleccionado"
             android:text="Comprar"
             android:textColor="#000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_centerInParent="true"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab"
@@ -110,13 +109,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="#FFEC00"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/corazonnegro" />
+            android:layout_alignParentEnd="true"
+            android:contentDescription="@string/botonfavorito" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>

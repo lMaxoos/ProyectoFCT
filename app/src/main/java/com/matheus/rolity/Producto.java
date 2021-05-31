@@ -1,4 +1,4 @@
-package com.example.rolity;
+package com.matheus.rolity;
 
 public class Producto {
     private String nombrePatin;

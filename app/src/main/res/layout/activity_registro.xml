@@ -7,7 +7,7 @@
     android:background="#BCBCBC"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context="com.example.rolity.ActivityRegistro">
+    tools:context="com.matheus.rolity.ActivityRegistro">
 
     <LinearLayout
         android:id="@+id/layoutLogo"
@@ -19,7 +19,7 @@
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bordecustombotonseleccionado"
+            android:background="@drawable/boton_seleccionado"
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -365,7 +365,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/bordecustombotonseleccionado"
+                android:background="@drawable/boton_seleccionado"
                 android:text="@string/botonRegistrarUsuario"
                 android:textColor="#000000" />
         </LinearLayout>

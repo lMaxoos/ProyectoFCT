@@ -1,138 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BCBCBC"
-    android:orientation="vertical"
-    tools:context="com.example.rolity.ActivityMain">
+    tools:context="com.matheus.rolity.ActivityMain">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/menuPrincipal"
+    <RelativeLayout
+        android:id="@+id/menuSuperiorMain"
         android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/bordecustom">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/fondo_personalizado"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/logoTresBarras"
-            android:layout_width="36dp"
-            android:layout_height="29dp"
-            android:contentDescription="@string/iconobarras"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.016"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             app:srcCompat="@drawable/tres_barras" />
 
+        <TextView
+            android:id="@+id/tvBuscador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="5dp"
+            android:layout_toStartOf="@id/logoLupa"
+            android:layout_toEndOf="@id/logoTresBarras"
+            android:layout_weight="1"
+            android:background="@drawable/boton_no_seleccionado"
+            android:hint="Buscar"
+            android:padding="5dp"
+            android:paddingStart="10dp"
+            android:textColor="#000000"
+            android:textColorHint="#333333"
+            android:textSize="16sp" />
+
         <ImageView
-            android:id="@+id/logoUsuario"
-            android:layout_width="36dp"
-            android:layout_height="29dp"
-            android:contentDescription="@string/iconousuario"
-            android:onClick="abrirUsuario"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.981"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.533"
-            app:srcCompat="@drawable/usuario" />
+            android:id="@+id/logoLupa"
+            android:layout_width="35dp"
+            android:layout_height="25dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/lupa" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <FrameLayout
+        android:id="@+id/contenedorMain"
+        android:layout_below="@id/menuSuperiorMain"
+        android:layout_above="@id/menuInferiorMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    </FrameLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutLogo"
-                android:layout_width="match_parent"
-                android:layout_height="65dp">
+    <LinearLayout
+        android:id="@+id/menuInferiorMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFEC00"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-                <ImageView
-                    android:id="@+id/logoRolity"
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:contentDescription="@string/logorolity"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0"
-                    app:srcCompat="@drawable/logo_rolity_amarillo" />
+        <ImageView
+            android:id="@+id/logoInicio"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/inicio" />
 
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="338dp"
-                    android:layout_height="2dp"
-                    android:background="#303030"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.493"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/logoRolity"
-                    app:layout_constraintVertical_bias="0.827" />
+        <ImageView
+            android:id="@+id/logoFavoritos"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/corazonnegro" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/logoCarrito"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/carritocompra" />
 
-            <ImageView
-                android:id="@+id/bannerEnvio"
-                android:layout_width="360dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/bannerenvio"
-                app:srcCompat="@drawable/enviogratis" />
+        <ImageView
+            android:id="@+id/logoUsuario"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:onClick="abrirUsuario"
+            app:srcCompat="@drawable/usuario" />
+    </LinearLayout>
 
-            <ImageView
-                android:id="@+id/bannerOutlet"
-                android:layout_width="360dp"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:contentDescription="@string/banneroutlet"
-                app:srcCompat="@drawable/outlet" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layoutNovedades"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:background="@drawable/bordecustom">
-
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/novedades"
-                    android:textColor="#000000"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewLista"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="5dp" />
-
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-
-</LinearLayout>
+</RelativeLayout>

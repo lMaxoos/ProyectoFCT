@@ -1,17 +1,17 @@
-package com.example.rolity;
+package com.matheus.rolity;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.proyecto1.R;
+import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -19,21 +19,25 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityMain extends AppCompatActivity {
+public class FragmentInicio extends Fragment {
     private List<Producto> producto;
     private FirebaseFirestore db;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        init();
+    public FragmentInicio() {
+        // Required empty public constructor
     }
 
-    private void init() {
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         producto = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -45,28 +49,19 @@ public class ActivityMain extends AppCompatActivity {
                     producto.add(new Producto(nombre, precio));
                 }
 
-                RecyclerView recyclerView = findViewById(R.id.recyclerViewLista);
-                ListAdaptador listAdaptador = new ListAdaptador(ActivityMain.this, producto, recyclerView);
+                RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
+                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, recyclerView);
                 recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new GridLayoutManager(ActivityMain.this, 2));
+                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 recyclerView.setAdapter(listAdaptador);
             }
         });
     }
 
-    public static void abrirProducto(Context context, String nombre) {
-        Intent producto = new Intent(context, ActivityProducto.class);
-        producto.putExtra("nombre", nombre);
-        context.startActivity(producto);
-    }
-
-    public void abrirUsuario(View view) {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            Intent usuario = new Intent(this, ActivityUsuario.class);
-            startActivity(usuario);
-        } else {
-            Intent login = new Intent(this, ActivityLoginRegister.class);
-            startActivity(login);
-        }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_inicio, container, false);
     }
 }

@@ -1,4 +1,4 @@
-package com.example.rolity;
+package com.matheus.rolity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.proyecto1.R;
+import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -72,8 +72,9 @@ public class ActivityRegistro extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 Toast.makeText(ActivityRegistro.this, "Usuario creado!",  Toast.LENGTH_SHORT).show();
-                                Intent login = new Intent(ActivityRegistro.this, ActivityUsuario.class);
-                                startActivity(login);
+                                Intent usuario = new Intent(ActivityRegistro.this, ActivityMain.class);
+                                usuario.putExtra("fragment", "usuario");
+                                startActivity(usuario);
                                 finish();
                             }
                         });

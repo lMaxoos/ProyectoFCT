@@ -1,4 +1,4 @@
-package com.example.rolity;
+package com.matheus.rolity;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.proyecto1.R;
+import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -197,44 +197,6 @@ public class FragmentDatos extends Fragment {
         }
         return false;
     }
-
-    /*private boolean comprobarPass(String email, String newPass) {
-        final boolean[] error = {true};
-
-        FirebaseUser usr = FirebaseAuth.getInstance().getCurrentUser();
-        AuthCredential credential = EmailAuthProvider.getCredential(usr.getEmail(), currentPass);
-        usr.reauthenticate(credential).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                System.out.println(e.getMessage());
-            }
-        }).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    usr.updatePassword(newPass).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful())
-                                System.out.println("Contraseña actualizada");
-                            error[0] = false;
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            System.out.println(e.getMessage());
-                            if (e.getMessage().contains("password is invalid"))
-                                Toast.makeText(getActivity(), "La contraseña es muy corta (6 caractéres mínimo)", Toast.LENGTH_SHORT).show();
-                            error[0] = true;
-                        }
-                    });
-                }
-            }
-        });
-
-        return error[0];
-    }*/
-
 
     private ArrayList<EditText> cargarEditTexts() {
         ArrayList<EditText> editTexts = new ArrayList<>();

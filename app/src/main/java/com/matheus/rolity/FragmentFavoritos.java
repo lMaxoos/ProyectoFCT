@@ -1,4 +1,4 @@
-package com.example.rolity;
+package com.matheus.rolity;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.proyecto1.R;
+import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -24,12 +24,12 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentLista extends Fragment {
+public class FragmentFavoritos extends Fragment {
     private List<Producto> producto;
     private FirebaseFirestore db;
     private FirebaseUser usr;
 
-    public FragmentLista() {
+    public FragmentFavoritos() {
 
     }
 
@@ -46,11 +46,12 @@ public class FragmentLista extends Fragment {
 
         producto = new ArrayList<>();
 
-        db.collection("usuarios").document(usr.getEmail()).collection("favoritos").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    List<DocumentSnapshot> favoritos = task.getResult().getDocuments();
+                    DocumentSnapshot document = task.getResult();
+                    ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
 
                     db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                         @Override
@@ -59,7 +60,7 @@ public class FragmentLista extends Fragment {
 
                             for (int i = 0; i < favoritos.size(); i++) {
                                 for (int j = 0; j < productos.size(); j++) {
-                                    if (productos.get(j).getString("nombre").equals(favoritos.get(i).getString("exists"))) {
+                                    if (productos.get(j).getString("nombre").equals(favoritos.get(i))) {
                                         String nombre = productos.get(j).getString("nombre");
                                         String precio = productos.get(j).getString("precio");
 
@@ -76,17 +77,14 @@ public class FragmentLista extends Fragment {
                         }
                     });
                 }
-                else
-                    System.out.println(task.getException().getMessage());
             }
         });
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista, container, false);
+        return inflater.inflate(R.layout.fragment_favoritos, container, false);
     }
 }
