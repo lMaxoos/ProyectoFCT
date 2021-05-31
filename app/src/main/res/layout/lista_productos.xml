@@ -14,9 +14,10 @@
         android:id="@+id/layoutProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:animateLayoutChanges="true"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgPatin"
@@ -34,7 +35,13 @@
                 android:id="@+id/nombrePatin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_horizontal|center_vertical"
                 android:text="Nombre producto"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -44,10 +51,15 @@
                 android:id="@+id/precioPatin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:text="Precio producto"
                 android:textColor="@color/black"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>

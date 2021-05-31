@@ -36,7 +36,7 @@ public class ActivityUsuario extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-                transition.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+                transition.setCustomAnimations(android.R.anim.slide_out_right, android.R.anim.slide_in_left);
                 transition.replace(R.id.contenedorUsuario, frDatos);
                 btnDatos.setBackground(seleccionado);
                 btnLista.setBackground(deseleccionado);
@@ -49,6 +49,7 @@ public class ActivityUsuario extends AppCompatActivity {
             public void onClick(View v) {
                 FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
                 transition.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
                 transition.replace(R.id.contenedorUsuario, frLista);
                 btnDatos.setBackground(deseleccionado);
                 btnLista.setBackground(seleccionado);

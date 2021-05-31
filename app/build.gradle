@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId "com.matheus.rolity"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         multiDexEnabled true
         versionCode 1
