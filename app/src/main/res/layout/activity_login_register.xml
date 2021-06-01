@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#BCBCBC"
     tools:context="com.matheus.rolity.ActivityLoginRegister">
+
+    <RelativeLayout
+        android:id="@+id/layoutSuperiorProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFEC00">
+
+        <ImageView
+            android:id="@+id/flechaAtras"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/flecha"
+            android:contentDescription="@string/flecha_atras" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#BCBCBC">
+        android:layout_below="@id/layoutSuperiorProducto">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,7 +45,6 @@
                     android:layout_height="71dp"
                     android:layout_gravity="center|top"
                     android:contentDescription="@string/logorolity"
-                    android:onClick="abrirMain"
                     app:srcCompat="@drawable/logo_rolity_amarillo" />
 
                 <View
@@ -77,8 +94,8 @@
                         android:layout_weight="1"
                         android:autofillHints=""
                         android:ems="10"
-                        android:hint="Correo electrónico"
-                        android:inputType="textPersonName"
+                        android:hint="@string/correo_electronico"
+                        android:inputType="textEmailAddress"
                         android:textColor="#000000"
                         android:textColorHint="#3C3C3C" />
                 </LinearLayout>
@@ -186,4 +203,4 @@
 
         </LinearLayout>
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -24,7 +24,7 @@ public class ActivityMain extends AppCompatActivity {
         FragmentInicio frInicio = new FragmentInicio();
         FragmentFavoritos frFavoritos = new FragmentFavoritos();
         FragmentUsuario frUsuario = new FragmentUsuario();
-        //FragmentCarritoCompra frCarrito = new FragmentCarritoCompra();
+        FragmentCarritoCompra frCarrito = new FragmentCarritoCompra();
 
         getSupportFragmentManager().beginTransaction().add(R.id.contenedorMain,frInicio).commit();
 
@@ -61,7 +61,10 @@ public class ActivityMain extends AppCompatActivity {
         logoCarritoCompra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+                transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                transition.replace(R.id.contenedorMain, frCarrito);
+                transition.commit();
             }
         });
 

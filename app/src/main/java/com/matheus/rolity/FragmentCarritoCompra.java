@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
-import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,14 +26,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentFavoritos extends Fragment {
-    private List<Producto> producto;
+public class FragmentCarritoCompra extends Fragment {
+    private List<Producto> productos;
     private FirebaseFirestore db;
     private FirebaseUser usr;
     private boolean logeado;
 
-    public FragmentFavoritos() {
-
+    public FragmentCarritoCompra() {
+        // Required empty public constructor
     }
 
     @Override
@@ -50,34 +49,34 @@ public class FragmentFavoritos extends Fragment {
         super.onStart();
 
         if (logeado) {
-            producto = new ArrayList<>();
+            productos = new ArrayList<>();
 
             db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
-                        ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
+                        ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
+                        if (carrito.size() == 0) {
 
-                        if (favoritos.size() == 0) {
                             db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     List<DocumentSnapshot> productos = queryDocumentSnapshots.getDocuments();
 
-                                    for (int i = 0; i < favoritos.size(); i++) {
+                                    for (int i = 0; i < carrito.size(); i++) {
                                         for (int j = 0; j < productos.size(); j++) {
-                                            if (productos.get(j).getString("nombre").equals(favoritos.get(i))) {
+                                            if (productos.get(j).getString("nombre").equals(carrito.get(i))) {
                                                 String nombre = productos.get(j).getString("nombre");
                                                 String precio = productos.get(j).getString("precio");
 
-                                                producto.add(new Producto(nombre, precio));
+                                                FragmentCarritoCompra.this.productos.add(new Producto(nombre, precio));
                                             }
                                         }
                                     }
 
                                     RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
-                                    ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, recyclerView);
+                                    ListAdaptador listAdaptador = new ListAdaptador(getActivity(), FragmentCarritoCompra.this.productos, recyclerView);
                                     recyclerView.setHasFixedSize(true);
                                     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                                     recyclerView.setAdapter(listAdaptador);
@@ -103,12 +102,13 @@ public class FragmentFavoritos extends Fragment {
                 }
             });
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_favoritos, container, false);
+        return inflater.inflate(R.layout.fragment_carrito_compra, container, false);
     }
 }

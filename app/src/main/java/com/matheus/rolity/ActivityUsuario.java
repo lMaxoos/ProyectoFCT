@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,6 +47,14 @@ public class ActivityUsuario extends AppCompatActivity {
             cargarDatos();
             preparado = true;
         }
+
+        ImageView flechaAtras = findViewById(R.id.flechaAtras);
+        flechaAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         Button btnGuardarDatos = this.findViewById(R.id.botonGuardarCambios);
         btnGuardarDatos.setOnClickListener(new View.OnClickListener() {

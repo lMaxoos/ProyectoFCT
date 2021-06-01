@@ -7,10 +7,26 @@
     android:background="#BCBCBC"
     tools:context="com.matheus.rolity.ActivityUsuario">
 
+    <RelativeLayout
+        android:id="@+id/layoutSuperiorProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFEC00">
+
+        <ImageView
+            android:id="@+id/flechaAtras"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/flecha" />
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/layoutSuperiorUsuario"
+        android:layout_below="@id/layoutSuperiorProducto"
         android:fadeScrollbars="false"
         android:scrollbarTrackVertical="@null"
         android:scrollbars="none">
@@ -23,7 +39,7 @@
             android:padding="16dp">
 
             <RelativeLayout
-                android:id="@+id/layoutSuperiorUsuario"
+                android:id="@+id/layoutNombreUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"

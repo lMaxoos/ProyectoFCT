@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.matheus.rolity.R;
@@ -22,6 +23,15 @@ public class ActivityLoginRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_register);
+
+        ImageView flechaAtras = findViewById(R.id.flechaAtras);
+        flechaAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         Button btnRegistro = findViewById(R.id.botonRegistro);
         Button btnInicioSesion = findViewById(R.id.botonEntrar);
 

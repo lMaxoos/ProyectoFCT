@@ -13,8 +13,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.matheus.rolity.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,21 +45,21 @@ import java.util.HashMap;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producto);
 
-        usr = FirebaseAuth.getInstance().getCurrentUser();
-
-        logeado = usr != null;
-
-        db = FirebaseFirestore.getInstance();
-
         Intent intent = getIntent();
         nombreProducto = intent.getStringExtra("nombre");
 
-        textViews = cargarTextViews();
+        db = FirebaseFirestore.getInstance();
 
+        textViews = cargarTextViews();
         cargarDatos();
 
+        usr = FirebaseAuth.getInstance().getCurrentUser();
+        logeado = usr != null;
+
         fab = findViewById(R.id.fab);
-        checkFavorito(fab);
+
+        if (logeado)
+            checkFavorito(fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,12 +111,46 @@ import java.util.HashMap;
 
             }
         });
+
+        Button btnAniadirCarrito = findViewById(R.id.botonAniadirCarrito);
+        btnAniadirCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (logeado) {
+                    db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
+                                carrito.add(nombreProducto);
+                                HashMap<String, ArrayList<String>> datos = new HashMap<>();
+                                datos.put("carrito", carrito);
+                                db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
+                                Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    // TODO: 31/05/2021 Mostrar dialog preguntando si quiere iniciar sesión
+                }
+            }
+        });
+
+        ImageView flechaAtras = findViewById(R.id.flechaAtras);
+        flechaAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        checkFavorito(fab);
+        if (logeado)
+            checkFavorito(fab);
     }
 
     private void checkFavorito(FloatingActionButton fab) {

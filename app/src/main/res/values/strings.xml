@@ -57,4 +57,13 @@
     <string name="title_activity_lk_a_s_d_jasd">lkASDJasd</string>
     <string name="title_activity_as">as</string>
     <string name="botonfavorito">botonFavorito</string>
+    <string name="flecha_atras">Flecha atrás</string>
+    <string name="correo_electronico">Correo electrónico</string>
+    <string name="aniadir_al_carrito">Añadir al carrito</string>
+    <string name="comprar">Comprar</string>
+    <string name="aviso_no_logeado_carrito">Inicie sesión para ver su lista de compra.</string>
+    <string name="aviso_no_logeado_favoritos">Inicie sesión para ver su lista de favoritos.</string>
+    <string name="iniciar_sesion">Iniciar sesión</string>
+    <string name="aviso_carrito_vacio">Vaya… Tu lista de la compra está vacía!</string>
+    <string name="aviso_favoritos_vacio">Vaya… Tu lista de favoritos está vacía!</string>
 </resources>
