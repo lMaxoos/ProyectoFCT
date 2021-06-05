@@ -45,12 +45,13 @@ public class FragmentInicio extends Fragment {
                 for (int i = 0; i < lista.size(); i++) {
                     String nombre = lista.get(i).getString("nombre");
                     String precio = lista.get(i).getString("precio");
+                    String imagen = lista.get(i).getString("imagen");
 
-                    producto.add(new Producto(nombre, precio));
+                    producto.add(new Producto(nombre, precio, imagen, "patines"));
                 }
 
-                RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
-                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, recyclerView);
+                RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewInicio);
+                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, recyclerView, false);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 recyclerView.setAdapter(listAdaptador);

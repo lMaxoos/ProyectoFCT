@@ -7,23 +7,6 @@
     tools:context="com.matheus.rolity.FragmentFavoritos">
 
     <RelativeLayout
-        android:id="@+id/layoutNingunProducto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="invisible">
-
-        <TextView
-            android:id="@+id/tvNingunProducto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="@string/aviso_favoritos_vacio"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </RelativeLayout>
-
-    <RelativeLayout
         android:id="@+id/layoutNoLogeado"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -40,7 +23,7 @@
             android:textSize="18sp" />
 
         <Button
-            android:id="@+id/botonIniciarSesion"
+            android:id="@+id/botonIniciarSesionFavoritos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvNoLogeado"
@@ -48,9 +31,27 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:background="@drawable/boton_seleccionado"
+            android:foreground="?android:attr/selectableItemBackground"
             android:padding="10dp"
             android:text="@string/iniciar_sesion"
             android:textColor="@color/black" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutNingunProducto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+
+        <TextView
+            android:id="@+id/tvNingunProducto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="@string/aviso_favoritos_vacio"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
     </RelativeLayout>
 
     <ScrollView
@@ -63,7 +64,7 @@
             android:orientation="vertical">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewLista"
+                android:id="@+id/recyclerViewFavoritos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

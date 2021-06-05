@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ActivityCategoriaProducto"
+    android:background="#BCBCBC">
+
+    <RelativeLayout
+        android:id="@+id/layoutSuperiorCategoriaProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFEC00">
+
+        <ImageView
+            android:id="@+id/flechaAtras"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            app:srcCompat="@drawable/flecha"
+            android:foreground="?android:attr/selectableItemBackground"/>
+
+        <TextView
+            android:id="@+id/tvCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/flechaAtras"
+            android:layout_marginStart="10dp"
+            android:text="@string/categoria"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewCategoriaProducto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:scrollbarTrackVertical="@null"
+        android:layout_below="@id/layoutSuperiorCategoriaProducto"/>
+
+</RelativeLayout>

@@ -20,7 +20,19 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            app:srcCompat="@drawable/flecha" />
+            app:srcCompat="@drawable/flecha"
+            android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/flechaAtras"
+            android:text="@string/usuario2"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
@@ -127,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/boton_seleccionado"
                 android:text="Cambiar contraseña"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:foreground="?android:attr/selectableItemBackground"/>
 
             <TextView
                 android:id="@+id/datosFacturacion"
@@ -381,7 +394,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/boton_seleccionado"
                     android:text="@string/botonGuardarCambios"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:foreground="?android:attr/selectableItemBackground"/>
 
                 <Button
                     android:id="@+id/botonCerrarSesion"
@@ -390,7 +404,8 @@
                     android:layout_gravity="center"
                     android:background="@drawable/fondo_personalizado"
                     android:text="@string/cerrar_sesion"
-                    android:textColor="#000000" />
+                    android:textColor="#000000"
+                    android:foreground="?android:attr/selectableItemBackground"/>
             </LinearLayout>
 
         </LinearLayout>

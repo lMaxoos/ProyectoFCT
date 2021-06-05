@@ -66,4 +66,13 @@
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="aviso_carrito_vacio">Vaya… Tu lista de la compra está vacía!</string>
     <string name="aviso_favoritos_vacio">Vaya… Tu lista de favoritos está vacía!</string>
+    <string name="buscar">Buscar</string>
+    <string name="logo_tres_barras">Logo tres barras</string>
+    <string name="lupa">lupa</string>
+    <string name="usuario2">Usuario</string>
+    <string name="categoria">Categoria</string>
+    <string name="patines">Patines</string>
+    <string name="longboard">Longboard</string>
+    <string name="login">Login</string>
+    <string name="registro">Registro</string>
 </resources>

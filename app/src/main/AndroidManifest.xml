@@ -4,23 +4,24 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo_rolity_amarillo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:windowSoftInputMode="adjustResize">
-        <activity android:name="com.matheus.rolity.ActivityUsuario"></activity>
-        <activity android:name="com.matheus.rolity.ActivityProducto" />
-        <activity android:name="com.matheus.rolity.ActivityMain">
+        <activity android:name=".ActivityCategoriaProducto" />
+        <activity android:name=".ActivityUsuario" />
+        <activity android:name=".ActivityProducto" />
+        <activity android:name=".ActivityMain">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.matheus.rolity.ActivityRegistro" />
-        <activity android:name="com.matheus.rolity.ActivityLoginRegister" />
+        <activity android:name=".ActivityRegistro" />
+        <activity android:name=".ActivityLoginRegister" />
     </application>
 
 </manifest>

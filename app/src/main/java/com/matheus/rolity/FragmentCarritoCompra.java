@@ -54,36 +54,15 @@ public class FragmentCarritoCompra extends Fragment {
             db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    RelativeLayout layout = getActivity().findViewById(R.id.layoutNingunProducto);
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
-                        if (carrito.size() == 0) {
-
-                            db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                @Override
-                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    List<DocumentSnapshot> productos = queryDocumentSnapshots.getDocuments();
-
-                                    for (int i = 0; i < carrito.size(); i++) {
-                                        for (int j = 0; j < productos.size(); j++) {
-                                            if (productos.get(j).getString("nombre").equals(carrito.get(i))) {
-                                                String nombre = productos.get(j).getString("nombre");
-                                                String precio = productos.get(j).getString("precio");
-
-                                                FragmentCarritoCompra.this.productos.add(new Producto(nombre, precio));
-                                            }
-                                        }
-                                    }
-
-                                    RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
-                                    ListAdaptador listAdaptador = new ListAdaptador(getActivity(), FragmentCarritoCompra.this.productos, recyclerView);
-                                    recyclerView.setHasFixedSize(true);
-                                    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
-                                    recyclerView.setAdapter(listAdaptador);
-                                }
-                            });
+                        if (carrito.size() != 0) {
+                            layout.setVisibility(View.INVISIBLE);
+                            crearLayouts(carrito);
                         } else {
-                            RelativeLayout layout = getActivity().findViewById(R.id.layoutNingunProducto);
+                            crearLayouts(carrito);
                             layout.setVisibility(View.VISIBLE);
                         }
                     }
@@ -93,7 +72,7 @@ public class FragmentCarritoCompra extends Fragment {
             RelativeLayout layout = getActivity().findViewById(R.id.layoutNoLogeado);
             layout.setVisibility(View.VISIBLE);
 
-            Button login = getActivity().findViewById(R.id.botonIniciarSesion);
+            Button login = getActivity().findViewById(R.id.botonIniciarSesionCarrito);
             login.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -103,6 +82,60 @@ public class FragmentCarritoCompra extends Fragment {
             });
         }
 
+    }
+
+    private void crearLayouts(ArrayList<String> carrito) {
+        RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewCarrito);
+
+
+        for (int i = 0; i < carrito.size(); i++) {
+            db.document(carrito.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot producto = task.getResult();
+                        String nombre = producto.getString("nombre");
+                        String precio = producto.getString("precio");
+                        String imagen = producto.getString("imagen");
+                        String categoria = producto.getString("categoria");
+
+                        productos.add(new Producto(nombre, precio, imagen, categoria));
+
+                        ListAdaptador listAdaptador = new ListAdaptador(getActivity(), productos, recyclerView, true);
+                        recyclerView.setHasFixedSize(true);
+                        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+                        recyclerView.setAdapter(listAdaptador);
+
+                    } else
+                        System.out.println(task.getException().getMessage());
+                }
+            });
+        }
+
+        /*db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                List<DocumentSnapshot> productos = queryDocumentSnapshots.getDocuments();
+
+                for (int i = 0; i < carrito.size(); i++) {
+                    for (int j = 0; j < productos.size(); j++) {
+                        if (productos.get(j).getString("nombre").equals(carrito.get(i))) {
+                            String nombre = productos.get(j).getString("nombre");
+                            String precio = productos.get(j).getString("precio");
+                            String imagen = productos.get(i).getString("imagen");
+
+                            FragmentCarritoCompra.this.productos.add(new Producto(nombre, precio, imagen));
+                        }
+                    }
+                }
+
+                RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
+                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), FragmentCarritoCompra.this.productos, recyclerView, true);
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
+                recyclerView.setAdapter(listAdaptador);
+            }
+        });*/
     }
 
     @Override

@@ -20,8 +20,20 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            app:srcCompat="@drawable/flecha"
-            android:contentDescription="@string/flecha_atras" />
+            android:contentDescription="@string/flecha_atras"
+            app:srcCompat="@drawable/flecha" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/flechaAtras"
+            android:text="@string/login"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
     </RelativeLayout>
 
     <ScrollView
@@ -96,8 +108,9 @@
                         android:ems="10"
                         android:hint="@string/correo_electronico"
                         android:inputType="textEmailAddress"
-                        android:textColor="#000000"
+                        android:textColor="@color/black"
                         android:textColorHint="#3C3C3C" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -114,7 +127,6 @@
                         android:text="@string/contrasenia"
                         android:textAllCaps="true"
                         android:textColor="#000000"
-                        android:textColorHint="#454545"
                         android:textSize="16sp" />
 
                     <EditText
@@ -126,6 +138,7 @@
                         android:ems="10"
                         android:hint="@string/textoContrasenia"
                         android:inputType="textPassword"
+                        android:textColor="@color/black"
                         android:textColorHint="#3C3C3C" />
 
                 </LinearLayout>
@@ -141,6 +154,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/boton_seleccionado"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:text="@string/botonEntrar"
                     android:textColor="#000000" />
 
@@ -196,6 +210,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:background="@drawable/boton_seleccionado"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:text="@string/botonRegistro"
                     android:textColor="#000000" />
 

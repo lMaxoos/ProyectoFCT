@@ -1,24 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#BCBCBC"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context="com.matheus.rolity.ActivityRegistro">
+
+    <RelativeLayout
+        android:id="@+id/layoutSuperiorRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFEC00">
+
+        <ImageView
+            android:id="@+id/flechaAtras"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/flecha_atras"
+            app:srcCompat="@drawable/flecha" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/flechaAtras"
+            android:text="@string/registro"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/layoutLogo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_below="@id/layoutSuperiorRegistro"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:paddingEnd="16dp">
 
         <TextView
             android:id="@+id/textView10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:background="@drawable/boton_seleccionado"
             android:gravity="center"
             android:paddingTop="5dp"
@@ -33,7 +66,7 @@
             android:layout_width="338dp"
             android:layout_height="2dp"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="9dp"
             android:layout_marginBottom="16dp"
             android:background="#303030" />
 
@@ -42,7 +75,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
+        android:layout_below="@id/layoutLogo"
+        android:layout_margin="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -366,9 +400,10 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/boton_seleccionado"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/botonRegistrarUsuario"
                 android:textColor="#000000" />
         </LinearLayout>
     </ScrollView>
 
-</LinearLayout>
+</RelativeLayout>

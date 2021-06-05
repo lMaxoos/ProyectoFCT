@@ -40,7 +40,6 @@ public class ActivityLoginRegister extends AppCompatActivity {
             public void onClick(View v) {
                 Intent registro = new Intent(ActivityLoginRegister.this, ActivityRegistro.class);
                 startActivity(registro);
-                finish();
             }
         });
 
@@ -55,27 +54,32 @@ public class ActivityLoginRegister extends AppCompatActivity {
     private void iniciarSesion() {
         EditText eEmail = findViewById(R.id.loginEmail);
         EditText eContrasenia = findViewById(R.id.loginPass);
-        String email = eEmail.getText().toString();
-        String contrasenia = eContrasenia.getText().toString();
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email,contrasenia).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    Intent usuario = new Intent(ActivityLoginRegister.this, ActivityMain.class);
-                    usuario.putExtra("fragment", "usuario");
-                    startActivity(usuario);
-                    finish();
-                } else {
-                    if (task.getException().getMessage().contains("password is invalid"))
-                        Toast.makeText(ActivityLoginRegister.this, "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
-                    else if (task.getException().getMessage().contains("no user record"))
-                        Toast.makeText(ActivityLoginRegister.this, "Esta dirección de correo no corresponde a ningún usuario.", Toast.LENGTH_SHORT).show();
-                    else
-                        Toast.makeText(ActivityLoginRegister.this, "Dirección de correo mal formulada.", Toast.LENGTH_SHORT).show();
+        if (eEmail.getText().toString().isEmpty() || eContrasenia.getText().toString().isEmpty())
+            Toast.makeText(this, "Los campos no pueden estar vacíos!", Toast.LENGTH_SHORT).show();
+        else {
+            String email = eEmail.getText().toString();
+            String contrasenia = eContrasenia.getText().toString();
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email,contrasenia).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Intent usuario = new Intent(ActivityLoginRegister.this, ActivityMain.class);
+                        usuario.putExtra("fragment", "usuario");
+                        startActivity(usuario);
+                        finish();
+                    } else {
+                        if (task.getException().getMessage().contains("password is invalid"))
+                            Toast.makeText(ActivityLoginRegister.this, "Contraseña incorrecta.", Toast.LENGTH_SHORT).show();
+                        else if (task.getException().getMessage().contains("no user record"))
+                            Toast.makeText(ActivityLoginRegister.this, "Esta dirección de correo no corresponde a ningún usuario.", Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(ActivityLoginRegister.this, "Dirección de correo mal formulada.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
-        });
+            });
+        }
 
     }
 }

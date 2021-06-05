@@ -27,7 +27,8 @@
                     android:id="@+id/logoRolity"
                     android:src="@drawable/logo_rolity_amarillo"
                     android:layout_width="100dp"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    android:layout_marginBottom="5dp"/>
 
                 <View
                     android:id="@+id/divider"
@@ -71,7 +72,7 @@
                 android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewLista"
+                android:id="@+id/recyclerViewInicio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

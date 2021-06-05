@@ -1,13 +1,17 @@
 package com.matheus.rolity;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.matheus.rolity.R;
@@ -27,6 +31,28 @@ public class ActivityRegistro extends AppCompatActivity {
     private FirebaseFirestore db;
 
     @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Cancelar");
+        builder.setMessage("¿Desea cancelar el registro?")
+            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    ActivityRegistro.this.onBackPressed();
+                    finish();
+                }
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            })
+            .setCancelable(false)
+            .show();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
@@ -37,6 +63,14 @@ public class ActivityRegistro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 crearUsuario();
+            }
+        });
+
+        ImageView flechaAtras = findViewById(R.id.flechaAtras);
+        flechaAtras.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

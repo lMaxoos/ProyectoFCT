@@ -1,16 +1,24 @@
 package com.matheus.rolity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Spinner;
 
-import com.matheus.rolity.R;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -23,26 +31,36 @@ public class ActivityMain extends AppCompatActivity {
 
         FragmentInicio frInicio = new FragmentInicio();
         FragmentFavoritos frFavoritos = new FragmentFavoritos();
-        FragmentUsuario frUsuario = new FragmentUsuario();
         FragmentCarritoCompra frCarrito = new FragmentCarritoCompra();
 
-        getSupportFragmentManager().beginTransaction().add(R.id.contenedorMain,frInicio).commit();
+        replaceFragment(frInicio);
 
-        String frag = getIntent().getStringExtra("fragment");
+        ImageView logoMenu = findViewById(R.id.logoTresBarras);
+        logoMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu menu = new PopupMenu(ActivityMain.this, v);
+                menu.inflate(R.menu.layout_menu);
 
-        if (frag != null) {
-            FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-            transition.replace(R.id.contenedorMain, frUsuario);
-        }
+                menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent abrirCategoria = new Intent(ActivityMain.this, ActivityCategoriaProducto.class);
+                        abrirCategoria.putExtra("categoria", item.toString());
+                        startActivity(abrirCategoria);
+                        return true;
+                    }
+                });
+
+                menu.show();
+            }
+        });
 
         ImageView logoMain = findViewById(R.id.logoInicio);
         logoMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-                transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-                transition.replace(R.id.contenedorMain, frInicio);
-                transition.commit();
+                replaceFragment(frInicio);
             }
         });
 
@@ -50,10 +68,7 @@ public class ActivityMain extends AppCompatActivity {
         logoFavoritos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-                transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-                transition.replace(R.id.contenedorMain, frFavoritos);
-                transition.commit();
+                replaceFragment(frFavoritos);
             }
         });
 
@@ -61,10 +76,7 @@ public class ActivityMain extends AppCompatActivity {
         logoCarritoCompra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
-                transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-                transition.replace(R.id.contenedorMain, frCarrito);
-                transition.commit();
+                replaceFragment(frCarrito);
             }
         });
 
@@ -72,24 +84,25 @@ public class ActivityMain extends AppCompatActivity {
         logoUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    Intent usuario = new Intent(ActivityMain.this, ActivityUsuario.class);
-                    startActivity(usuario);
-                } else {
-                    Intent loginRegister = new Intent(ActivityMain.this, ActivityLoginRegister.class);
-                    startActivity(loginRegister);
-                }
+                abrirUsuario();
             }
         });
     }
 
-    public static void abrirProducto(Context context, String nombre) {
-        Intent producto = new Intent(context, ActivityProducto.class);
-        producto.putExtra("nombre", nombre);
-        context.startActivity(producto);
+    private void replaceFragment(Fragment fr) {
+        FragmentTransaction transition = getSupportFragmentManager().beginTransaction();
+        transition.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transition.replace(R.id.contenedorMain, fr);
+        transition.commit();
     }
 
-    public void abrirUsuario(View view) {
-
+    private void abrirUsuario() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            Intent usuario = new Intent(ActivityMain.this, ActivityUsuario.class);
+            startActivity(usuario);
+        } else {
+            Intent loginRegister = new Intent(ActivityMain.this, ActivityLoginRegister.class);
+            startActivity(loginRegister);
+        }
     }
 }

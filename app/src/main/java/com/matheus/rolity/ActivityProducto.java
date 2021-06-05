@@ -1,5 +1,6 @@
   package com.matheus.rolity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,6 +11,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.matheus.rolity.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,11 +38,12 @@ import java.util.HashMap;
     private static boolean favorito = false;
     private FirebaseFirestore db;
     private FirebaseUser usr;
-    private String nombreProducto;
+    private Producto producto;
     private final String[] NOMBRES_CAMPOS = new String[]{"precio", "nombre", "descripcion", "caracteristicas"};
     private ArrayList<TextView> textViews;
     private FloatingActionButton fab;
     private boolean logeado;
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +51,7 @@ import java.util.HashMap;
         setContentView(R.layout.activity_producto);
 
         Intent intent = getIntent();
-        nombreProducto = intent.getStringExtra("nombre");
+        producto = (Producto) intent.getSerializableExtra("producto");
 
         db = FirebaseFirestore.getInstance();
 
@@ -66,14 +71,16 @@ import java.util.HashMap;
             public void onClick(View view) {
                 if (logeado) {
                     if (favorito) {
-                        db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        DocumentReference array = db.collection("usuarios").document(usr.getEmail());
+                        array.update("favoritos", FieldValue.arrayRemove(path));
+                        /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
                                     for (int i = 0; i < favoritos.size(); i++) {
-                                        if (favoritos.get(i).equals(nombreProducto)) {
+                                        if (favoritos.get(i).equals(producto.getNombreProducto())) {
                                             favoritos.remove(i);
                                             break;
                                         }
@@ -84,29 +91,31 @@ import java.util.HashMap;
                                     db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
                                 }
                             }
-                        });
+                        });/*/
                         fab.setImageResource(R.drawable.corazonnegro);
                         favorito = false;
                     } else {
-                        db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        DocumentReference array = db.collection("usuarios").document(usr.getEmail());
+                        array.update("favoritos", FieldValue.arrayUnion(path));
+                        /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                 if (task.isSuccessful()) {
                                     DocumentSnapshot document = task.getResult();
                                     ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
-                                    favoritos.add(nombreProducto);
+                                    favoritos.add(producto.getNombreProducto());
                                     HashMap<String, ArrayList<String>> datos = new HashMap<>();
                                     datos.put("favoritos", favoritos);
                                     db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
                                 }
                             }
-                        });
+                        });*/
 
                         fab.setImageResource(R.drawable.corazonrojo);
                         favorito = true;
                     }
                 } else {
-                    // TODO: 31/05/2021 Mostrar dialog preguntando si quiere iniciar sesión
+                    mostrarDialog();
                 }
 
             }
@@ -117,22 +126,25 @@ import java.util.HashMap;
             @Override
             public void onClick(View v) {
                 if (logeado) {
-                    db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    DocumentReference array = db.collection("usuarios").document(usr.getEmail());
+                    array.update("carrito", FieldValue.arrayUnion(path));
+                    Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
+                    /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
-                                carrito.add(nombreProducto);
+                                carrito.add(producto.getNombreProducto());
                                 HashMap<String, ArrayList<String>> datos = new HashMap<>();
                                 datos.put("carrito", carrito);
                                 db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
                                 Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });
+                    });*/
                 } else {
-                    // TODO: 31/05/2021 Mostrar dialog preguntando si quiere iniciar sesión
+                    mostrarDialog();
                 }
             }
         });
@@ -146,7 +158,29 @@ import java.util.HashMap;
         });
     }
 
-    @Override
+      private void mostrarDialog() {
+          AlertDialog.Builder builder = new AlertDialog.Builder(this);
+          builder.setTitle("No ha iniciado sesión");
+          builder.setMessage("¿Desea iniciar sesión?")
+            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent loginRegister = new Intent(ActivityProducto.this, ActivityLoginRegister.class);
+                    startActivity(loginRegister);
+
+                }
+            })
+            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            })
+            .setCancelable(true)
+            .show();
+      }
+
+      @Override
     protected void onResume() {
         super.onResume();
         if (logeado)
@@ -161,7 +195,7 @@ import java.util.HashMap;
                     DocumentSnapshot document = task.getResult();
                     ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
 
-                    if (favoritos.contains(nombreProducto)) {
+                    if (favoritos.contains(path)) {
                         favorito = true;
                         fab.setImageResource(R.drawable.corazonrojo);
                     }
@@ -175,15 +209,13 @@ import java.util.HashMap;
     }
 
     private void cargarDatos() {
-        StorageReference st = FirebaseStorage.getInstance().getReference();
         ImageView imagenProducto = findViewById(R.id.imagenProducto);
-
-        StorageReference pathReference = st.child("patines/" + nombreProducto + ".jpg");
         Glide.with(this)
-                .load(pathReference)
+                .load(producto.getImagen())
                 .into(imagenProducto);
 
-        db.collection("patines").document(nombreProducto).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+        path = db.collection(producto.getCategoria()).document(producto.getNombreProducto()).getPath();
+        db.collection(producto.getCategoria()).document(producto.getNombreProducto()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 for (int i = 0; i < textViews.size(); i++) {
