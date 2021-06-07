@@ -12,16 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +45,18 @@ public class FragmentCarritoCompra extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        // cargarDatos();
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
+        cargarDatos();
+    }
 
+    private void cargarDatos() {
         if (logeado) {
             productos = new ArrayList<>();
 
@@ -58,11 +67,13 @@ public class FragmentCarritoCompra extends Fragment {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
                         ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
+                        ArrayList<String> carritoNum = (ArrayList<String>) document.get("carrito_num");
+
                         if (carrito.size() != 0) {
+                            crearLayouts(carrito, carritoNum);
                             layout.setVisibility(View.INVISIBLE);
-                            crearLayouts(carrito);
                         } else {
-                            crearLayouts(carrito);
+                            crearLayouts(carrito, carritoNum);
                             layout.setVisibility(View.VISIBLE);
                         }
                     }
@@ -81,14 +92,13 @@ public class FragmentCarritoCompra extends Fragment {
                 }
             });
         }
-
     }
 
-    private void crearLayouts(ArrayList<String> carrito) {
+    private void crearLayouts(ArrayList<String> carrito, ArrayList<String> carritoNum) {
         RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewCarrito);
 
-
         for (int i = 0; i < carrito.size(); i++) {
+            String path = db.document(carrito.get(i)).getPath();
             db.document(carrito.get(i)).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -99,9 +109,9 @@ public class FragmentCarritoCompra extends Fragment {
                         String imagen = producto.getString("imagen");
                         String categoria = producto.getString("categoria");
 
-                        productos.add(new Producto(nombre, precio, imagen, categoria));
+                        productos.add(new Producto(nombre, precio, imagen, categoria, path));
 
-                        ListAdaptador listAdaptador = new ListAdaptador(getActivity(), productos, recyclerView, true);
+                        ListAdaptador listAdaptador = new ListAdaptador(getActivity(), productos, carritoNum, recyclerView, true);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
                         recyclerView.setAdapter(listAdaptador);
@@ -111,31 +121,6 @@ public class FragmentCarritoCompra extends Fragment {
                 }
             });
         }
-
-        /*db.collection("patines").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-            @Override
-            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                List<DocumentSnapshot> productos = queryDocumentSnapshots.getDocuments();
-
-                for (int i = 0; i < carrito.size(); i++) {
-                    for (int j = 0; j < productos.size(); j++) {
-                        if (productos.get(j).getString("nombre").equals(carrito.get(i))) {
-                            String nombre = productos.get(j).getString("nombre");
-                            String precio = productos.get(j).getString("precio");
-                            String imagen = productos.get(i).getString("imagen");
-
-                            FragmentCarritoCompra.this.productos.add(new Producto(nombre, precio, imagen));
-                        }
-                    }
-                }
-
-                RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewLista);
-                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), FragmentCarritoCompra.this.productos, recyclerView, true);
-                recyclerView.setHasFixedSize(true);
-                recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 1));
-                recyclerView.setAdapter(listAdaptador);
-            }
-        });*/
     }
 
     @Override

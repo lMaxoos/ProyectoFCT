@@ -61,7 +61,7 @@ public class ActivityCategoriaProducto extends AppCompatActivity {
                 }
 
                 RecyclerView recyclerView = findViewById(R.id.recyclerViewCategoriaProducto);
-                ListAdaptador listAdaptador = new ListAdaptador(ActivityCategoriaProducto.this, producto, recyclerView, false);
+                ListAdaptador listAdaptador = new ListAdaptador(ActivityCategoriaProducto.this, producto, null, recyclerView, false);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(ActivityCategoriaProducto.this, 2));
                 recyclerView.setAdapter(listAdaptador);

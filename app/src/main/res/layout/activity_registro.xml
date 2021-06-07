@@ -22,7 +22,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:contentDescription="@string/flecha_atras"
-            app:srcCompat="@drawable/flecha" />
+            app:srcCompat="@drawable/logo_flecha" />
 
         <TextView
             android:id="@+id/textView2"
@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/boton_seleccionado"
+            android:background="@drawable/fondo_boton_seleccionado"
             android:gravity="center"
             android:paddingTop="5dp"
             android:paddingBottom="5dp"
@@ -399,7 +399,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/boton_seleccionado"
+                android:background="@drawable/fondo_boton_seleccionado"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/botonRegistrarUsuario"
                 android:textColor="#000000" />

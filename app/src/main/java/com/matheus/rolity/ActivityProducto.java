@@ -1,7 +1,8 @@
-  package com.matheus.rolity;
+package com.matheus.rolity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
@@ -16,34 +17,34 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
-import com.matheus.rolity.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-  public class ActivityProducto extends AppCompatActivity {
-    private static boolean favorito = false;
+public class ActivityProducto extends AppCompatActivity {
+    private boolean esFavorito, estaEnCarrito;
     private FirebaseFirestore db;
     private FirebaseUser usr;
     private Producto producto;
     private final String[] NOMBRES_CAMPOS = new String[]{"precio", "nombre", "descripcion", "caracteristicas"};
+    private final String[] TITLE_DIALOG = new String[]{"No ha iniciado sesión", "Este producto ya está en el carrito"};
+    private final String[] MENSAJE_DIALOG = new String[]{"¿Desea iniciar sesión?", "¿Desea agregar más?"};
     private ArrayList<TextView> textViews;
     private FloatingActionButton fab;
     private boolean logeado;
     private String path;
+    private Snackbar snackbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,61 +64,30 @@ import java.util.HashMap;
 
         fab = findViewById(R.id.fab);
 
-        if (logeado)
+        if (logeado) {
             checkFavorito(fab);
+            checkCarrito(path);
+        }
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (logeado) {
-                    if (favorito) {
+                    if (esFavorito) {
                         DocumentReference array = db.collection("usuarios").document(usr.getEmail());
                         array.update("favoritos", FieldValue.arrayRemove(path));
-                        /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
-                                    ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
-                                    for (int i = 0; i < favoritos.size(); i++) {
-                                        if (favoritos.get(i).equals(producto.getNombreProducto())) {
-                                            favoritos.remove(i);
-                                            break;
-                                        }
-                                    }
-
-                                    HashMap<String, ArrayList<String>> datos = new HashMap<>();
-                                    datos.put("favoritos", favoritos);
-                                    db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
-                                }
-                            }
-                        });/*/
-                        fab.setImageResource(R.drawable.corazonnegro);
-                        favorito = false;
+                        fab.setImageResource(R.drawable.logo_corazonnegro);
+                        esFavorito = false;
                     } else {
                         DocumentReference array = db.collection("usuarios").document(usr.getEmail());
                         array.update("favoritos", FieldValue.arrayUnion(path));
-                        /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    DocumentSnapshot document = task.getResult();
-                                    ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
-                                    favoritos.add(producto.getNombreProducto());
-                                    HashMap<String, ArrayList<String>> datos = new HashMap<>();
-                                    datos.put("favoritos", favoritos);
-                                    db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
-                                }
-                            }
-                        });*/
-
-                        fab.setImageResource(R.drawable.corazonrojo);
-                        favorito = true;
+                        fab.setImageResource(R.drawable.logo_corazonrojo);
+                        esFavorito = true;
                     }
                 } else {
-                    mostrarDialog();
+                    mostrarDialog(0, null);
                 }
-
             }
         });
 
@@ -126,25 +96,12 @@ import java.util.HashMap;
             @Override
             public void onClick(View v) {
                 if (logeado) {
-                    DocumentReference array = db.collection("usuarios").document(usr.getEmail());
-                    array.update("carrito", FieldValue.arrayUnion(path));
-                    Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
-                    /*db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
-                                carrito.add(producto.getNombreProducto());
-                                HashMap<String, ArrayList<String>> datos = new HashMap<>();
-                                datos.put("carrito", carrito);
-                                db.collection("usuarios").document(usr.getEmail()).set(datos, SetOptions.merge());
-                                Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });*/
+                    if (estaEnCarrito)
+                        mostrarDialog(1, v);
+                    else
+                        abrirSnackBarToast(v);
                 } else {
-                    mostrarDialog();
+                    mostrarDialog(0, null);
                 }
             }
         });
@@ -158,33 +115,104 @@ import java.util.HashMap;
         });
     }
 
-      private void mostrarDialog() {
-          AlertDialog.Builder builder = new AlertDialog.Builder(this);
-          builder.setTitle("No ha iniciado sesión");
-          builder.setMessage("¿Desea iniciar sesión?")
-            .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent loginRegister = new Intent(ActivityProducto.this, ActivityLoginRegister.class);
-                    startActivity(loginRegister);
+    private void mostrarDialog(int tipo, View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(TITLE_DIALOG[tipo]);
+        builder.setMessage(MENSAJE_DIALOG[tipo])
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (tipo == 0) {
+                            Intent loginRegister = new Intent(ActivityProducto.this, ActivityLoginRegister.class);
+                            startActivity(loginRegister);
+                        } else if (tipo == 1) {
+                            abrirSnackBarToast(v);
+                        }
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(true)
+                .show();
+    }
 
-                }
-            })
-            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.dismiss();
-                }
-            })
-            .setCancelable(true)
-            .show();
-      }
+    private void abrirSnackBarToast(View v) {
+        snackbar = Snackbar.make(v, "", Snackbar.LENGTH_INDEFINITE);
+        View customSnackView = getLayoutInflater().inflate(R.layout.layout_snackbar_agregar_carrito, null);
 
-      @Override
-    protected void onResume() {
-        super.onResume();
-        if (logeado)
-            checkFavorito(fab);
+        snackbar.getView().setBackgroundColor(Color.TRANSPARENT);
+        Snackbar.SnackbarLayout snackbarLayout = (Snackbar.SnackbarLayout) snackbar.getView();
+        snackbarLayout.setPadding(0, 0, 0, 0);
+
+        EditText numeroProductos = customSnackView.findViewById(R.id.numeroProductosSnack);
+        Button botonMas = customSnackView.findViewById(R.id.botonMasSnack);
+        Button botonMenos = customSnackView.findViewById(R.id.botonMenosSnack);
+
+        botonMas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int valor = Integer.parseInt(numeroProductos.getText().toString());
+                if (valor != 10) {
+                    valor++;
+                    numeroProductos.setText(String.valueOf(valor));
+                }
+            }
+        });
+
+        botonMenos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int valor = Integer.parseInt(numeroProductos.getText().toString());
+                if (valor != 1) {
+                    valor--;
+                    numeroProductos.setText(String.valueOf(valor));
+                }
+            }
+        });
+
+        ImageView equis = customSnackView.findViewById(R.id.equis);
+        equis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                snackbar.dismiss();
+            }
+        });
+
+        Button agregarCarrito = customSnackView.findViewById(R.id.agregarCarrito);
+        agregarCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DocumentReference array = db.collection("usuarios").document(usr.getEmail());
+                array.update("carrito", FieldValue.arrayUnion(path));
+                array.update("carrito_num", FieldValue.arrayUnion(path + "/" + numeroProductos.getText().toString()));
+                Toast.makeText(ActivityProducto.this, "Añadido al carrito!", Toast.LENGTH_SHORT).show();
+                snackbar.dismiss();
+            }
+        });
+
+        snackbarLayout.addView(customSnackView, 0);
+        snackbar.show();
+    }
+
+    private void checkCarrito(String path) {
+        db.collection("usuarios").document(usr.getEmail()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    ArrayList<String> carrito = (ArrayList<String>) document.get("carrito");
+
+                    if (carrito.contains(path))
+                        estaEnCarrito = true;
+                    else
+                        estaEnCarrito = false;
+                }
+            }
+        });
     }
 
     private void checkFavorito(FloatingActionButton fab) {
@@ -196,12 +224,11 @@ import java.util.HashMap;
                     ArrayList<String> favoritos = (ArrayList<String>) document.get("favoritos");
 
                     if (favoritos.contains(path)) {
-                        favorito = true;
-                        fab.setImageResource(R.drawable.corazonrojo);
-                    }
-                    else {
-                        favorito = false;
-                        fab.setImageResource(R.drawable.corazonnegro);
+                        esFavorito = true;
+                        fab.setImageResource(R.drawable.logo_corazonrojo);
+                    } else {
+                        esFavorito = false;
+                        fab.setImageResource(R.drawable.logo_corazonnegro);
                     }
                 }
             }
@@ -218,7 +245,9 @@ import java.util.HashMap;
         db.collection(producto.getCategoria()).document(producto.getNombreProducto()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                for (int i = 0; i < textViews.size(); i++) {
+                String precio = documentSnapshot.getString(NOMBRES_CAMPOS[0]) + " €";
+                textViews.get(0).setText(precio);
+                for (int i = 1; i < textViews.size(); i++) {
                     textViews.get(i).setText(documentSnapshot.getString(NOMBRES_CAMPOS[i]));
                 }
             }
@@ -234,5 +263,12 @@ import java.util.HashMap;
         textViews.add(findViewById(R.id.tvCaracteristicas));
 
         return textViews;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (logeado)
+            checkFavorito(fab);
     }
 }

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,7 +50,7 @@ public class FragmentInicio extends Fragment {
                 }
 
                 RecyclerView recyclerView = getActivity().findViewById(R.id.recyclerViewInicio);
-                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, recyclerView, false);
+                ListAdaptador listAdaptador = new ListAdaptador(getActivity(), producto, null, recyclerView, false);
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                 recyclerView.setAdapter(listAdaptador);

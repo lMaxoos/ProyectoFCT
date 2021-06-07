@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|top"
+    android:animateLayoutChanges="true"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/layoutProducto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:animateLayoutChanges="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <RelativeLayout
+            android:id="@+id/layoutProductoDatos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgProducto"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/nombreProducto"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imgProducto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:text="Nombre producto"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/precioProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nombreProducto"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Precio producto"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layoutNumeroProductos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@id/layoutProductoDatos"
+            android:background="@drawable/fondo_boton_no_seleccionado"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <Button
+                android:id="@+id/botonMenosProducto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center"
+                android:text="-"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#303030" />
+
+            <EditText
+                android:id="@+id/numeroProductosProducto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@null"
+                android:gravity="center"
+                android:inputType="none"
+                android:text="0"
+                android:textSize="16sp"
+                android:textColor="@color/black" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#303030" />
+
+            <Button
+                android:id="@+id/botonMasProducto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:gravity="center"
+                android:text="+"
+                android:textColor="@color/black" />
+
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
+

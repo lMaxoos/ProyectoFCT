@@ -98,7 +98,7 @@ public class FragmentFavoritos extends Fragment {
 
                         productos.add(new Producto(nombre, precio, imagen, categoria));
 
-                        ListAdaptador listAdaptador = new ListAdaptador(getActivity(), productos, recyclerView, false);
+                        ListAdaptador listAdaptador = new ListAdaptador(getActivity(), productos, null, recyclerView, false);
                         recyclerView.setHasFixedSize(true);
                         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                         recyclerView.setAdapter(listAdaptador);

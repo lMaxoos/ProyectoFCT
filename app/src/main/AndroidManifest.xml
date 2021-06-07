@@ -10,6 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:windowSoftInputMode="adjustResize">
+        <activity android:name=".ActivityBusqueda"></activity>
         <activity android:name=".ActivityCategoriaProducto" />
         <activity android:name=".ActivityUsuario" />
         <activity android:name=".ActivityProducto" />

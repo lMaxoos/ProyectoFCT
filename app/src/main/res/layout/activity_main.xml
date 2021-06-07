@@ -27,7 +27,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/logo_tres_barras"
-            app:srcCompat="@drawable/tres_barras"
+            app:srcCompat="@drawable/logo_tres_barras"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
         <EditText
@@ -39,7 +39,7 @@
             android:layout_toStartOf="@id/logoLupa"
             android:layout_toEndOf="@id/logoTresBarras"
             android:autofillHints="@string/buscar"
-            android:background="@drawable/boton_no_seleccionado"
+            android:background="@drawable/fondo_boton_no_seleccionado"
             android:hint="@string/buscar"
             android:inputType="text"
             android:padding="5dp"
@@ -58,7 +58,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:contentDescription="@string/lupa"
-            app:srcCompat="@drawable/lupa"
+            app:srcCompat="@drawable/logo_lupa"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
     </RelativeLayout>
@@ -87,7 +87,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/inicio"
+            app:srcCompat="@drawable/logo_inicio"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
         <ImageView
@@ -95,7 +95,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/corazonnegro"
+            app:srcCompat="@drawable/logo_corazonnegro"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
         <ImageView
@@ -103,7 +103,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_weight="1"
-            app:srcCompat="@drawable/carritocompra"
+            app:srcCompat="@drawable/logo_carritocompra"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
 
         <ImageView
@@ -112,7 +112,7 @@
             android:layout_height="30dp"
             android:layout_weight="1"
             android:onClick="abrirUsuario"
-            app:srcCompat="@drawable/usuario"
+            app:srcCompat="@drawable/logo_usuario"
             android:foreground="?android:attr/selectableItemBackgroundBorderless"/>
     </LinearLayout>
 

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="4dp"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardCornerRadius="4dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="Añadir al carrito"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/separador"
+                android:layout_width="2dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_toEndOf="@id/textView1"
+                android:background="@android:color/white" />
+
+            <LinearLayout
+                android:id="@+id/numeroAgregarCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/separador"
+                android:background="@drawable/fondo_numero_productos"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/botonMenosSnack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white" />
+
+                <EditText
+                    android:id="@+id/numeroProductosSnack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@null"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:text="1"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:background="@color/white" />
+
+                <Button
+                    android:id="@+id/botonMasSnack"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separador2"
+                android:layout_width="2dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="13dp"
+                android:layout_marginEnd="13dp"
+                android:layout_toEndOf="@id/numeroAgregarCarrito"
+                android:background="@android:color/white" />
+
+            <Button
+                android:id="@+id/agregarCarrito"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:layout_toEndOf="@id/separador2"
+                android:background="@drawable/fondo_boton_seleccionado"
+                android:text="Enviar"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/equis"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/logo_equis"/>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

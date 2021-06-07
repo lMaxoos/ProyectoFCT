@@ -14,15 +14,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class ActivityMain extends AppCompatActivity {
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class ActivityMain extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PopupMenu menu = new PopupMenu(ActivityMain.this, v);
+
                 menu.inflate(R.menu.layout_menu);
 
                 menu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -53,6 +56,19 @@ public class ActivityMain extends AppCompatActivity {
                 });
 
                 menu.show();
+            }
+        });
+
+        ImageView logoLupa = findViewById(R.id.logoLupa);
+        logoLupa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView buscador = findViewById(R.id.buscador);
+                String busqueda = buscador.getText().toString();
+
+                Intent abrirBusqueda = new Intent(ActivityMain.this, ActivityBusqueda.class);
+                abrirBusqueda.putExtra("busqueda", busqueda);
+                startActivity(abrirBusqueda);
             }
         });
 

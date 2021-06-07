@@ -7,6 +7,15 @@ public class Producto implements Serializable {
     private String precioProducto;
     private String imagen;
     private String categoria;
+    private String path;
+
+    public Producto(String nombreProducto, String precioProducto, String imagen, String categoria, String path) {
+        this.nombreProducto = nombreProducto;
+        this.precioProducto = precioProducto;
+        this.imagen = imagen;
+        this.categoria = categoria;
+        this.path = path;
+    }
 
     public Producto(String nombreProducto, String precioProducto, String imagen, String categoria) {
         this.nombreProducto = nombreProducto;
@@ -29,5 +38,9 @@ public class Producto implements Serializable {
 
     public String getCategoria() {
         return categoria;
+    }
+
+    public String getPath() {
+        return path;
     }
 }

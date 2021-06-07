@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.matheus.rolity.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -88,7 +87,7 @@ public class ActivityUsuario extends AppCompatActivity {
     private void mostrarDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_cambiar_pass, null);
+        View view = inflater.inflate(R.layout.layout_dialog_cambiar_pass, null);
         builder.setView(view);
 
         AlertDialog dialog = builder.create();

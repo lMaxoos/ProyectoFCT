@@ -42,7 +42,7 @@
 
             <ImageView
                 android:id="@+id/bannerEnvio"
-                android:src="@drawable/enviogratis"
+                android:src="@drawable/banner_enviogratis"
                 android:layout_width="360dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -50,7 +50,7 @@
 
             <ImageView
                 android:id="@+id/bannerOutlet"
-                android:src="@drawable/outlet"
+                android:src="@drawable/banner_outlet"
                 android:layout_width="360dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/boton_seleccionado"
+                android:background="@drawable/fondo_boton_seleccionado"
                 android:gravity="center"
                 android:paddingTop="10dp"
                 android:paddingBottom="10dp"
