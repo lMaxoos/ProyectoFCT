@@ -6,7 +6,7 @@
     tools:context=".FragmentCarritoCompra">
 
     <RelativeLayout
-        android:id="@+id/layoutNoLogeado"
+        android:id="@+id/layoutNoLogeadoCarrito"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="invisible">

@@ -157,7 +157,7 @@ public class ActivityUsuario extends AppCompatActivity {
                 TextView tvLetraUsuario = findViewById(R.id.tvLetraUsuario);
                 TextView tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
                 tvNombreUsuario.setText(nombreApellidos);
-                //tvLetraUsuario.setText(nombreApellidos.charAt(0));
+                tvLetraUsuario.setText("" + nombreApellidos.charAt(0));
             }
         });
     }

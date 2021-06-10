@@ -80,7 +80,7 @@ public class FragmentCarritoCompra extends Fragment {
                 }
             });
         } else {
-            RelativeLayout layout = getActivity().findViewById(R.id.layoutNoLogeado);
+            RelativeLayout layout = getActivity().findViewById(R.id.layoutNoLogeadoCarrito);
             layout.setVisibility(View.VISIBLE);
 
             Button login = getActivity().findViewById(R.id.botonIniciarSesionCarrito);
